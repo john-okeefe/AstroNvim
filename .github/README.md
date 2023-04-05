@@ -1,8 +1,12 @@
+<div>
+```diff
+# Edited for this repository
+```
+</div>
+
 <div align="center" id="madewithlua">
     <img src="https://astronvim.com/img/logo/astronvim.svg" width="110", height="100">
 </div>
-
-<div><span style="color:grey">Edited for this repository</span></div>
 
 <h1 align="center">AstroNvim</h1>
 
