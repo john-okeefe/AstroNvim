@@ -108,7 +108,7 @@ nvim
 
 #### Or to edit the repository use SSH
 ```shell
-git clone --depth 1 git@github.com:john-okeefe/AstroNvim.git ~/.config/nvim
+git clone git@github.com:john-okeefe/AstroNvim.git ~/.config/nvim
 nvim
 ```
 
