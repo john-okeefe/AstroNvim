@@ -70,6 +70,8 @@ AstroNvim is an aesthetic and feature-rich neovim config that is extensible and 
 - Formatting and Linting with [Null-ls](https://github.com/jose-elias-alvarez/null-ls.nvim)
 - Language Server Protocol with [Native LSP](https://github.com/neovim/nvim-lspconfig)
 - Debug Adapter Protocol with [nvim-dap](https://github.com/mfussenegger/nvim-dap)
+- Better Bracket Control with [nvim-surround](https://github.com/kylechui/nvim-surround)
+- Better Ending Complete with [treesitter-endwise](https://github.com/RRethy/nvim-treesitter-endwise)
 
 ## ⚡ Requirements
 
