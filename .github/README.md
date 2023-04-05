@@ -2,6 +2,8 @@
     <img src="https://astronvim.com/img/logo/astronvim.svg" width="110", height="100">
 </div>
 
+<div><span style="color:grey">Edited for this repository</span></div>
+
 <h1 align="center">AstroNvim</h1>
 
 <h4 align="center">
@@ -89,12 +91,20 @@ AstroNvim is an aesthetic and feature-rich neovim config that is extensible and 
 ```shell
 mv ~/.config/nvim ~/.config/nvim.bak
 mv ~/.local/share/nvim ~/.local/share/nvim.bak
+mv ~/.local/state/nvim ~/.local/state/nvim.bak
+mv ~/.cache/nvim ~/.cache/nvim.bak
 ```
 
 #### Clone the repository
 
 ```shell
-git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+git clone --depth 1 https://github.com/john-okeefe/AstroNvim.git ~/.config/nvim
+nvim
+```
+
+#### Or to edit the repository use SSH
+```shell
+git clone --depth 1 git@github.com:john-okeefe/AstroNvim.git ~/.config/nvim
 nvim
 ```
 
