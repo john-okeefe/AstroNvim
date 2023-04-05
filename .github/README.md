@@ -1,7 +1,7 @@
-<div>
 ```diff
 # Edited for this repository
 ```
+
 </div>
 
 <div align="center" id="madewithlua">
