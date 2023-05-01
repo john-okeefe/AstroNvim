@@ -150,6 +150,7 @@ M.env.sign_handlers = astronvim.user_opts("heirline.sign_handlers", M.env.sign_h
 ---@param fallback string the color to fallback on if a lualine theme is not present
 ---@return string # The background color of the lualine theme or the fallback parameter if one doesn't exist
 function M.hl.lualine_mode(mode, fallback)
+  if not vim.g.colors_name then return fallback end
   local lualine_avail, lualine = pcall(require, "lualine.themes." .. vim.g.colors_name)
   local lualine_opts = lualine_avail and lualine[mode]
   return lualine_opts and type(lualine_opts.a) == "table" and lualine_opts.a.bg or fallback
@@ -361,10 +362,22 @@ end
 -- @usage local heirline_component = { provider = require("astronvim.utils.status").provider.numbercolumn }
 -- @see astronvim.utils.status.utils.stylize
 function M.provider.numbercolumn(opts)
-  opts = extend_tbl({ escape = false }, opts)
+  opts = extend_tbl({ thousands = false, culright = true, escape = false }, opts)
   return function()
+    local lnum, rnum, virtnum = vim.v.lnum, vim.v.relnum, vim.v.virtnum
     local num, relnum = vim.opt.number:get(), vim.opt.relativenumber:get()
-    local str = ((num and not relnum) and "%l") or ((relnum and not num) and "%r") or "%{v:relnum?v:relnum:v:lnum}"
+    local str
+    if not num and not relnum then
+      str = ""
+    elseif virtnum ~= 0 then
+      str = "%="
+    else
+      local cur = relnum and (rnum > 0 and rnum or (num and lnum or 0)) or lnum
+      if opts.thousands and cur > 999 then
+        cur = string.reverse(cur):gsub("%d%d%d", "%1" .. opts.thousands):reverse():gsub("^%" .. opts.thousands, "")
+      end
+      str = (rnum == 0 and not opts.culright and relnum) and cur .. "%=" or "%=" .. cur
+    end
     return M.utils.stylize(str, opts)
   end
 end
@@ -400,7 +413,8 @@ function M.provider.foldcolumn(opts)
         for col = 1, width do
           str = str
             .. (
-              ((closed and (col == foldinfo.level or col == width)) and foldclosed)
+              (vim.v.virtnum ~= 0 and foldsep)
+              or ((closed and (col == foldinfo.level or col == width)) and foldclosed)
               or ((foldinfo.start == vim.v.lnum and first_level + col > foldinfo.llevel) and foldopen)
               or foldsep
             )
